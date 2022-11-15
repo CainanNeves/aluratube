@@ -1,8 +1,8 @@
-#NaniacTube
+# NaniacTube
 
-##Minha versão do AluraTube da imersão React da Alura
+## Minha versão do AluraTube da imersão React da Alura
 
-##Documentation
+## Documentation
 
 - [Desafios Propostos][]
 
