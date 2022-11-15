@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+  .light {
+    --background-base: #f9f9f9;
+    --background-1: #ffffff;
+    --background-2: #f0f0f0;
+    --border-base: #e5e5e5;
+    --textcolor-base: #222222;
+  }
+
+  .dark {
+    --background-base: #181818;
+    --background-1: #202020;
+    --background-2: #313131;
+    --border-base: #383838;
+    --textcolor-base: #ffffff;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: theme(colors.backgroundLevel2);
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme(colors.backgroundLevel1);
+    border-radius: 100vh;
+    border: 3px solid theme(colors.backgroundLevel2);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: theme(colors.backgroundBase);
+  }
+}
