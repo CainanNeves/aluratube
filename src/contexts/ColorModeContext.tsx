@@ -12,15 +12,23 @@ export function ColorModeContextProvider({ children, ...props }) {
   const [mode, setMode] = useState("");
 
   function toggleMode() {
-    if (mode === "dark") setMode("light");
-    else if (mode === "light") setMode("dark");
+    if (mode === "dark") {
+      localStorage.theme = "light";
+      setMode("light");
+    } else if (mode === "light") {
+      localStorage.theme = "dark";
+      setMode("dark");
+    }
   }
 
   useEffect(() => {
-    if (mode === "")
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-        setMode("dark");
-      else setMode("light");
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    )
+      setMode("dark");
+    else setMode("light");
   }),
     [];
 
