@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  googleId  String?  @unique
+  avatarUrl String?
+  bannerUrl String?
+  createdAt DateTime @default(now())
+
+  ownPlaylists Playlist[]
+}
+
+model Playlist {
+  id        String   @id @default(cuid())
+  title     String
+  ownerId   String
+  createdAt DateTime @default(now())
+
+  hasVideos VideosInPlaylists[]
+
+  User User @relation(fields: [ownerId], references: [id])
+}
+
+model Video {
+  id   String @id @default(cuid())
+  name String
+  url  String @unique
+
+  inPlaylists VideosInPlaylists[]
+}
+
+model VideosInPlaylists {
+  id String @id @default(cuid())
+  videoId String
+  playlistId String
+
+  video   Video  @relation(fields: [videoId], references: [id])
+  playlist   Playlist @relation(fields: [playlistId], references: [id])
+
+  @@unique([playlistId, videoId])
+}
